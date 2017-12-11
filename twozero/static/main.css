@@ -39,9 +39,38 @@
 .cells{
     font-size: 2em !important;
 }
+
 .buttons{
     padding: 0.2em !important;
     margin-left: 2em !important; 
     margin-top: 0em !important;
     background-color: #ffffff !important;
+}
+
+.highscore{
+    margin-top: -6em !important;
+    height: 6em !important;
+}
+
+.valuescore{
+    margin-left: 0em !important;
+    margin-top: 0em !important;
+}
+
+.yourscore{
+    margin-left: 11em !important;
+    margin-top: -0.5em !important;
+}
+
+.sizeresolution{
+    height: 5em !important;
+    width: 27em !important;
+}
+
+.mainicon{
+    margin-left: 4em !important;
+}
+
+.white{
+    color:white !important;
 }

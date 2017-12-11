@@ -11,14 +11,13 @@
 <body>
 <div class="wrapper">
 	<div class="ui segment topsegment">
-		<div class="ui scorelabel"></div> 
 		<div class="ui segment mainwindow">
 		<div class="ui submit green button start">START</div>
 			<div class="ui segment childwindow">
 			<input type="hidden" class="hiddenoption" value="{{ no_of_blocks }}"/>
 
 				{% if no_of_blocks == '5' %}
-					<div class="ui grid cellgrid">
+				<div class="ui grid cellgrid">
 					<div class="five column row colcell">
 						<button class="submit column cells" id="1" value="" data-x="0" data-y="0"></button>
 						<button class="submit column cells" id="2" value="" data-x="0" data-y="1"></button>
@@ -54,7 +53,6 @@
 						<button class="submit column cells" id="24" value="" data-x="4" data-y="3"></button>
 						<button class="submit column cells" id="25" value="" data-x="4" data-y="4"></button>
 					</div>
-					
 				</div>
 				{% elif no_of_blocks == '4' %}
 					<div class="ui grid cellgrid">
@@ -91,6 +89,26 @@
 						<button class="submit column cells" id="2" value=""></button>
 						<button class="submit column cells" id="3" value=""></button>
 						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="5" value=""></button>
+						<button class="submit column cells" id="6" value=""></button>
+						<button class="submit column cells" id="7" value=""></button>
+						<button class="submit column cells" id="8" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="9" value=""></button>
+						<button class="submit column cells" id="10" value=""></button>
+						<button class="submit column cells" id="11" value=""></button>
+						<button class="submit column cells" id="12" value=""></button>
+						<button class="submit column cells" id="13" value=""></button>
+						<button class="submit column cells" id="14" value=""></button>
+						<button class="submit column cells" id="15" value=""></button>
+						<button class="submit column cells" id="16" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="17" value=""></button>
+						<button class="submit column cells" id="18" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
 						<button class="submit column cells" id="1" value=""></button>
 						<button class="submit column cells" id="2" value=""></button>
 						<button class="submit column cells" id="3" value=""></button>
@@ -145,29 +163,8 @@
 						<button class="submit column cells" id="2" value=""></button>
 						<button class="submit column cells" id="3" value=""></button>
 						<button class="submit column cells" id="4" value=""></button>
-					</div>
-					<div class="eight column row colcell">
-						<button class="submit column cells" id="1" value=""></button>
-						<button class="submit column cells" id="2" value=""></button>
-						<button class="submit column cells" id="3" value=""></button>
-						<button class="submit column cells" id="4" value=""></button>
-						<button class="submit column cells" id="1" value=""></button>
-						<button class="submit column cells" id="2" value=""></button>
-						<button class="submit column cells" id="3" value=""></button>
-						<button class="submit column cells" id="4" value=""></button>
-					</div>
-					<div class="eight column row colcell">
-						<button class="submit column cells" id="1" value=""></button>
-						<button class="submit column cells" id="2" value=""></button>
-						<button class="submit column cells" id="3" value=""></button>
-						<button class="submit column cells" id="4" value=""></button>
-						<button class="submit column cells" id="1" value=""></button>
-						<button class="submit column cells" id="2" value=""></button>
-						<button class="submit column cells" id="3" value=""></button>
-						<button class="submit column cells" id="4" value=""></button>
-					</div>
-					
-					</div>
+					</div>	
+				</div>
 				{% endif %}		
 
 				
@@ -187,6 +184,21 @@
 				</button>
 			</div>	
 		</div>	
+		<div class="ui inverted segment highscore">
+			<div class="ui statistics">
+				<div class="orange statistic">
+					<div class="value">
+						<i class="grid layout icon"></i>.2048
+					</div>
+				</div>
+					
+				<h1><div class="label yourscore">Your Score : </div></h1>
+				<div class="ui purple inverted statistic">
+					<div class="value score valuescore">
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>	
 </div>	
 
