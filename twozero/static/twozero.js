@@ -6,11 +6,14 @@ $(document).ready(function(){
 	$('.leftkey').hide();
 	$('.rightkey').hide();
 	$('.scorelabel').hide();
+	$('.buttons').hide();
 
 	m = parseInt($('.hiddenoption').val())-1;
 	n = parseInt($('.hiddenoption').val())-1;
 	max = m;
 	maxsize = m*m;
+	b= m+1;
+	boxcolor = b*b;
 
 	function getUniqueId(id){	
 
@@ -29,9 +32,32 @@ $(document).ready(function(){
 	}
 
 	function setColor(){
-		for(i=0;i<=maxsize;i++){
-			if($('#'.i).text == "2"){
-				$('#'.i).css("background-color","yellow")
+		for(var i=1;i<=boxcolor;i++){
+			console.log(i);
+			if($('#'+i).text() == '2'){
+				$('#'+i).css("background","white");
+			}else if($('#'+i).text() == ''){
+				$('#'+i).css("background","#ccc0b3");
+			}else if($('#'+i).text() == '4'){
+				$('#'+i).css("background","#FBEEE6");
+			}else if($('#'+i).text() == '8'){
+				$('#'+i).css("background","#f2b179");
+			}else if($('#'+i).text() == '16'){
+				$('#'+i).css("background","#f67c5f");
+			}else if($('#'+i).text() == '32'){
+				$('#'+i).css("background","#C0392B");
+			}else if($('#'+i).text() == '64'){
+				$('#'+i).css("background","#2980B9");
+			}else if($('#'+i).text() == '128'){
+				$('#'+i).css("background","#FCF3CF");
+			}else if($('#'+i).text() == '256'){
+				$('#'+i).css("background","#76D7C4");
+			}else if($('#'+i).text() == '512'){
+				$('#'+i).css("background","#F9E79F");
+			}else if($('#'+i).text() == '1024'){
+				$('#'+i).css("background","#F6DDCC");	
+			}else{
+				$('#'+i).css("background","#ebadfa");
 			}
 		}
 	}
@@ -50,7 +76,7 @@ $(document).ready(function(){
 		}while(value == 3);
 		return value;
 	}
-
+	setColor();
 	$('.start').click(function(){
 
 		$('#'+getRandomNumber(1,16)).text("2");
@@ -61,6 +87,8 @@ $(document).ready(function(){
 		$('.downkey').show();
 		$('.leftkey').show();
 		$('.rightkey').show();
+		$('.buttons').show();
+		setColor();
 	});
 
 	function grid(){
@@ -87,8 +115,8 @@ $(document).ready(function(){
 				}
 			}
 		}
-		setTimeout(setOnUniqueId(), 10000);
-		setColor();
+		setOnUniqueId();
+		// setTimeout(setOnUniqueId(), 10000);	
 	}	
 
 	$('.upkey').click(function(){
@@ -164,6 +192,7 @@ $(document).ready(function(){
 			}
 		} 		
 		drawGrid(a);
+		setColor();
 	});
 	
 	$('.leftkey').click(function(){
@@ -237,6 +266,7 @@ $(document).ready(function(){
 			}
 		} 
 		drawGrid(a);
+		setColor();
 	});
 
 	$('.downkey').click(function(){
@@ -311,6 +341,7 @@ $(document).ready(function(){
 		}
 		 
 		drawGrid(a);
+		setColor();
 	});
 
 	$('.rightkey').click(function(){
@@ -387,6 +418,7 @@ $(document).ready(function(){
 		} 
 		
 		drawGrid(a);
+		setColor();
 	});
 
 });

@@ -2,21 +2,22 @@
 	margin-bottom: 10em !important;
     margin-top: 2em !important;
     margin-right: 30em !important;
-    margin-left: 30em !important;
-    height: 33em !important;
+    margin-left: 32em !important;
+    height: 34em !important;
     width: 29em !important;
-    background-color: #c7bcb1 !important;
+    background-color: grey !important;
     padding: 1em !important;
 }
 
 .topsegment{
 	height:48.5em !important;
-    background-color: grey !important;
+    background-color: #FADBD8 !important;
 }
 
 .childwindow{
 	height: 27em !important;
     width: 27em !important;
+    background-color: #bbada0 !important;
 }
 
 .cellgrid{
@@ -37,4 +38,10 @@
 
 .cells{
     font-size: 2em !important;
+}
+.buttons{
+    padding: 0.2em !important;
+    margin-left: 2em !important; 
+    margin-top: 0em !important;
+    background-color: #ffffff !important;
 }
