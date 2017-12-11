@@ -1,0 +1,217 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="{% url 'godonate:campmanual' mycamp.id %}" method="post">
+	{% csrf_token %}
+	<div class="ui segment tablesegment">
+		<div class="ui segment camptitle">
+		{% if mycamp %}
+			<h1 class="ctitle"><u>{{ mycamp.title }}</u></h1><a href='{% url "godonate:camplist" %}' class="blackcolor homelogout"><b><strong>Home</strong></b></a>/<a href='{% url "godonate:logout" %}' class="blackcolor"><b><strong>Logout</strong></b></a>
+		{% endif %}
+
+		</div>
+		<div class="ui segment topchart">
+			<table class="ui big striped table splittable">
+				<thead>
+					<tr>
+					<th>Camp</th>
+					<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for ocamp in othercamps %}
+					<tr>
+						<td>{{ ocamp.title }}</td>
+						<td>
+							
+							<div class="ui input textinput">
+								<input class="singleamount" type="text" placeholder="amt..." name="{{ ocamp.id }}">
+							</div>
+						</td>
+					</tr>
+				{% endfor %}	
+				</tbody>
+			</table>
+			<input type="hidden" class="wallet" value="{{ candonate }}">
+			<h2 class="textsplitmanualy"><u><a class="total greentext fval"></a></u> out of ${{ candonate }}</h2>
+			<input class="ui green button donatebuttonmanually" type="submit" value="Click Here To Donate">
+		</div>
+	</div>
+</form>	
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+<head>
+{% load mathfilters %}
+<style type="text/css">
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}
+</style>
+</head>
+<body>
+{% if option %}
+	{% if option == '1' %}
+		<form action="{% url 'godonate:userequal' %}" method="post">
+			<h2><u>Start Donating</u>..........</h2>
+			{% csrf_token %}
+			
+			Enter Amount To Split Equally : <input type="text" name="amount" required /><br>			
+			Select camps : {% for camp in camps %}
+							<input type="checkbox" name="camps" value="{{ camp.id }}">{{ camp.title }}</input>
+							{% endfor %} <br><br>							
+			<input type="submit" value="Donate">
+			<a href='{% url "godonate:logout" %}' class="topright">Logout</a>
+		</form>
+
+	{% elif option == '2' %}
+		<form action="{% url 'godonate:usermanual' %}" method="post">
+			<h2><u>Start Donating</u>..........</h2>
+			{% csrf_token %}
+			
+			Enter Amount To Donate 			
+			Select camps :  <div name="divd"><ul>
+							{% for camp in othercamps %}
+							<li>
+								{{ camp.title }}<input type="text" size="8" name="{{ camp.id }}"><br>
+							</li>
+							{% endfor %}</div>
+							<br></ul>							
+			<input type="submit" value="Donate" onclick="senddata()">
+			<a href='{% url "godonate:logout" %}' class="topright">Logout</a>
+		</form>
+
+	{% elif option == '3' %}
+		<form action="{% url 'godonate:campequal' %}" method="post">
+			<h2><u>Start Donating</u>..........</h2>
+			{% csrf_token %}
+			
+			Enter Amount To Split Equally : <input type="text" name="amount" required /><br>
+			<ul>
+			<b>Your camps :</b>
+			{% for camp in collections %}
+			
+			<li>
+				Title : {{ camp.camp_name.title }}<br>
+				Goal : {{ camp.camp_name.goal_amount }}<br>
+				Wallet : {{ camp.wallet }}<br>
+				Eligible to donate : 
+				{% if camp.wallet > camp.camp_name.goal_amount %}
+					Yes <br>
+					Can Donate : {{ camp.wallet|sub:camp.camp_name.goal_amount }}
+				{% else %}
+					No
+				{% endif %}
+				<br>
+
+			</li><br>
+
+			{% endfor %}
+			</ul>
+			From camp :  <select size="1" name="fromcamp">
+								{% for camp in mycamps %}
+								<option value="{{ camp.id }}">{{ camp.title }}</option>
+								{% endfor %}
+						  </select><br><br> 	
+			To camps  :   {% for camp in othercamps %}
+							<input type="checkbox" name="camps" value="{{ camp.id }}">{{ camp.title }}</input>
+							{% endfor %} <br><br> 	
+			 							
+			<input type="submit" value="Donate">
+			<a href='{% url "godonate:logout" %}' class="topright">Logout</a>
+		</form>
+
+	{% elif option == '4' %}
+		<form action="{% url 'godonate:campmanual' %}" method="post">
+			<h2><u>Start Donating</u>..........</h2>
+			{% csrf_token %}
+			
+			<b>Your camps :</b>  
+			{% for camp in collections %}
+			
+			<li>
+				Title : {{ camp.camp_name.title }}<br>
+				Goal : {{ camp.camp_name.goal_amount }}<br>
+				Wallet : {{ camp.wallet }}<br>
+				Eligible to donate : 
+				{% if camp.wallet > camp.camp_name.goal_amount %}
+					Yes<br>
+					Can Donate : {{ camp.wallet|sub:camp.camp_name.goal_amount }}
+				{% else %}
+					No
+				{% endif %}<br>
+
+			</li><br>
+
+			{% endfor %}
+			</ul>
+			From camp  :    <select size="1" name="fromcamp">
+								{% for camp in mycamps %}
+								<option value="{{ camp.id }}">{{ camp.title }}</option>
+								{% endfor %}
+						    </select><br><br>	
+
+			To camps   :    <ul>
+							{% for camp in othercamps %}
+							<li>
+								{{ camp.title }}<input type="text" size="8" name="{{ camp.id }}"><br>
+							</li>
+							{% endfor %}
+							<br></ul>						
+			<input type="submit" value="Donate">
+			<a href='{% url "godonate:logout" %}' class="topright">Logout</a>
+		</form>
+
+	{% else %}
+		<h1>Invalid Request....Please try again</h1>
+	{% endif %}
+
+{% else %}	
+	<h1>Invalid Request....Please try again</h1>
+{% endif %}	
+<script type="text/javascript">
+	function senddata(){
+
+	}
+</script>	
+</body>
+</html> -->

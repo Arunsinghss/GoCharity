@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="ui segment camplistsegment">
+		{% csrf_token %}
+		<div class="ui segment campsegmentheader" style="background-image: url('{% static 'images/ban.jpg' %}')">	
+			
+		</div>
+		<div class="ui black segment campsegmentfooter">
+			<div class="ui accordion field">
+				<div class="title">
+					<h4><i class="dropdown icon"></i>
+					Organize Your Own Camp </h4>
+				</div>
+				<div class="content createcamp">
+					<div class="transition hidden">
+						<form action="{% url 'godonate:addcamp' %}" method="post">
+							<div class="ui black segment">
+								<h3><u>Create your own Donation Camp</u></h3>
+								{% csrf_token %}
+								<div class="field">
+								<label>Title</label><br>
+									<div class="ui input">
+										<input placeholder="title" type="text" name="title" required />
+									</div>
+								</div><br>	
+								<div class="field">
+								<label>Cause</label><br>
+									<div class="ui input">
+										<input placeholder="cause" type="text" name="cause" required />
+									</div>
+								</div><br>
+								<div class="field">						
+								<label>Goal Amount</label><br>
+									<div class="ui input">
+										<input placeholder="amt" type="text" name="goal" required />
+									</div>
+								</div><br><!-- 
+								<div class="field">						
+								<label>Image</label><br>
+									<div class="ui input">
+										<input placeholder="equal height*width" type="text" name="goal" />
+									</div>
+									<i class="file icon"></i>
+									<input type="file" name="file">
+								</div><br> -->
+
+								<input type="submit" value="create" class="ui green button">
+								<div class="ui red button formcancel" value="cancel">cancel</div>
+								<br>
+							</div>
+						</form>
+
+					</div>	
+				</div>
+			</div><br>			
+			{% if camps %}
+				<div class="ui five stackable cards">
+					{% for camp in camps %}	
+					
+						<a class="ui link card campcard" id="{{ camp.id }}" href='{% url "godonate:board" camp.id %}'%}">
+							<div class="small image">
+								<img src="{{ camp.image.url }}">
+							</div>
+							<div class="content">
+								<div class="header cardtitle">{{ camp.title}}</div>
+							</div>
+							<div class="extra content cardorganised">
+								
+								organised in {{ camp.created_on.year }} by {{ camp.organizer.user.first_name}}
+								
+							</div>
+						</a>
+					{% endfor %}
+				</div>
+			{% endif %}	
+		</div>
+	
+</div>
+{% endblock content %}
+
+<!-- <div class="card">
+					<div class="content">
+						<div class="header center">{{ camp.title }}</div>
+						<div class="meta">camp</div>
+						<div class="description">
+							{{ camp.cause }}
+						</div><br>
+						<a href="{% url "godonate:board" camp.id %}"><div class="ui bottom attached button visit">							
+							visit
+						</div></a>	
+					</div>
+				</div> -->
+
+
+<!-- {% load static %} -->
+<!-- <html>
+<head>
+<style>
+
+</style>
+</head>
+<body>
+
+	<div class="ui segments">
+		<div class="ui segment" id="campsegmentheader">	
+			<h1>This<h1>		
+		</div>
+		<div class="ui segment" id="campsegmentfooter">			
+		</div>
+			
+		</div>
+	</div>	
+	<form action="{% url 'godonate:userdonating' %}" method="post">
+		{% csrf_token %}	
+		<h2><u>Donation Camps</u>/<a href='{% url "godonate:usercamp" %}'>Your Camps</a>/<a href='{% url "godonate:dashboard" %}'>Create Camps</a></h2>
+		
+
+		{% if camps %}
+		<ul>
+		{% for camp in camps %}
+		
+		<li>
+			<strong>Title : </strong><a href='{% url "godonate:board" camp.id %}'>{{ camp.title }}</a></a><br>
+			<strong><b>Cause : </b></strong>{{ camp.cause }}<br>		
+		</li><br>
+
+		{% endfor %}
+		</ul>
+		{% endif %}
+		<fieldset>
+		<legend><h3><u>Start Donating </u>:</h3></legend>
+		<pre>
+			To Camp:  <select size="1" name="tocamp">
+							{% for camp in camps %}
+							<option value="{{ camp.id }}">{{ camp.title }}</option>
+							{% endfor %}
+						</select> 
+			Amount :  <input type="text" name="amount" size="7" required /><br>
+				<input type="submit" value="Donate">		
+		</pre>
+		</form>
+		<form action="{% url 'godonate:split' %}" method="post">
+		{% csrf_token %}
+		<u>To Donate In Multiple Camps</u> : <select name="option">
+										<option value="{{ 1 }}">Split Equally</option>
+										<option value="{{ 2 }}">Split Manually</option>	
+									  </select>
+		<input type="submit" value="Go">									  
+		</form>							  
+		</fieldset>
+	
+	
+	<form action="{% url 'godonate:campdonating' %}" method="post">
+		{% csrf_token %}
+		{% if isapplicable %}
+		<fieldset>
+		<legend><h3><u>Camp To Camp Donation</u> :</h3></legend>
+		<pre>
+			From   :  <select size="1" name="fromcamp">
+							{% for camp in mycamps %}
+							<option value="{{ camp.id }}">{{ camp.title }}</option>
+							{% endfor %}
+					  </select> 
+			To     :  <select size="1" name="tocamp">							
+							{% for camp in othercamps %}
+							<option value="{{ camp.id }}">{{ camp.title }}</option>
+							{% endfor %}
+					  </select> 	
+			Amount :  <input type="text" name="amount" size="7" required /><br>
+				<input type="submit" value="Donate">			 
+		</pre>
+	</form>	
+	<form action="{% url 'godonate:split' %}" method="post">
+		{% csrf_token %}
+		<u>To Donate In Multiple Camps</u> : <select name="option">
+										<option value="{{ 3 }}">Split Equally</option>
+										<option value="{{ 4 }}">Split Manually</option>	
+									  </select>
+		<input type="submit" value="Go">									  
+	</form>		
+	
+	{% endif %}
+	</fieldset>
+	<a href='{% url "godonate:logout" %}' class="" ="topright">Logout</a>
+</body>
+</html>
+
+ -->

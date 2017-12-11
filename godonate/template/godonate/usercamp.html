@@ -1,0 +1,34 @@
+<html>
+<head>
+<h3><u><a href='{% url "godonate:camplist" %}'>Back to Camps</a></u></h3>
+</head>
+<body>
+	{% if collections %}
+	
+	<ul>
+	{% for camp in collections %}
+	
+	<li>
+		<strong><b>Title : </b></strong>{{ camp.camp_name.title }}<br>
+		<strong><b>Cause : </b></strong>{{ camp.camp_name.cause }}<br>	
+		<strong><b>Goal : </b></strong>{{ camp.camp_name.goal_amount }}<br>
+		<strong><b>Wallet : </b></strong>{{ camp.wallet }}<br>
+		<strong><b>Eligible to donate : </b></strong>
+		{% if camp.wallet > camp.camp_name.goal_amount %}
+			Yes
+		{% else %}
+			No
+		{% endif %}<br>
+
+	</li><br>
+
+	{% endfor %}
+	</ul>
+
+	{% else %}
+		<strong> <b>You have organized no camps.........<a href='{% url "godonate:dashboard" %}'>Create a Camp</a></b></strong>
+	{% endif %}
+	
+</body>
+</html>
+
