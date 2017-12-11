@@ -1,0 +1,197 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link href=" {% static 'semantics-ui/semantic.min.css' %}" rel="stylesheet"  type="text/css">
+	<link href="{% static 'main.css' %}" rel="stylesheet"  type="text/css">
+	<script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'semantics-ui/semantic.min.js' %}"></script>	
+</head>
+<body>
+<div class="wrapper">
+	<div class="ui segment topsegment">
+		<div class="ui scorelabel"></div> 
+		<div class="ui segment mainwindow">
+		<div class="ui submit green button start">START</div>
+			<div class="ui segment childwindow">
+			<input type="hidden" class="hiddenoption" value="{{ no_of_blocks }}"/>
+
+				{% if no_of_blocks == '5' %}
+					<div class="ui grid cellgrid">
+					<div class="five column row colcell">
+						<button class="submit column cells" id="1" value="" data-x="0" data-y="0"></button>
+						<button class="submit column cells" id="2" value="" data-x="0" data-y="1"></button>
+						<button class="submit column cells" id="3" value="" data-x="0" data-y="2"></button>
+						<button class="submit column cells" id="4" value="" data-x="0" data-y="3"></button>
+						<button class="submit column cells" id="5" value="" data-x="0" data-y="4"></button>
+					</div>
+					<div class="five column row colcell">
+						<button class="submit column cells" id="6" value="" data-x="1" data-y="0"></button>
+						<button class="submit column cells" id="7" value="" data-x="1" data-y="1"></button>
+						<button class="submit column cells" id="8" value="" data-x="1" data-y="2"></button>
+						<button class="submit column cells" id="9" value="" data-x="1" data-y="3"></button>
+						<button class="submit column cells" id="10" value="" data-x="1" data-y="4"></button>
+					</div>
+					<div class="five column row colcell">
+						<button class="submit column cells" id="11" value="" data-x="2" data-y="0"></button>
+						<button class="submit column cells" id="12" value="" data-x="2" data-y="1"></button>
+						<button class="submit column cells" id="13" value="" data-x="2" data-y=""></button>
+						<button class="submit column cells" id="14" value="" data-x="2" data-y="3"></button>
+						<button class="submit column cells" id="15" value="" data-x="2" data-y="4"></button>
+					</div>
+					<div class="five column row colcell">
+						<button class="submit column cells" id="16" value="" data-x="3" data-y="0"></button>
+						<button class="submit column cells" id="17" value="" data-x="3" data-y="1"></button>
+						<button class="submit column cells" id="18" value="" data-x="3" data-y="2"></button>
+						<button class="submit column cells" id="19" value="" data-x="3" data-y="3"></button>
+						<button class="submit column cells" id="20" value="" data-x="3" data-y="4"></button>
+					</div>
+					<div class="five column row colcell">
+						<button class="submit column cells" id="21" value="" data-x="4" data-y="0"></button>
+						<button class="submit column cells" id="22" value="" data-x="4" data-y="1"></button>
+						<button class="submit column cells" id="23" value="" data-x="4" data-y="2"></button>
+						<button class="submit column cells" id="24" value="" data-x="4" data-y="3"></button>
+						<button class="submit column cells" id="25" value="" data-x="4" data-y="4"></button>
+					</div>
+					
+				</div>
+				{% elif no_of_blocks == '4' %}
+					<div class="ui grid cellgrid">
+					<div class="four column row colcell">
+						<button class="submit column cells" id="1"  data-x="0" data-y="0"></button>
+						<button class="submit column cells" id="2"  data-x="0" data-y="1"></button>
+						<button class="submit column cells" id="3"  data-x="0" data-y="2"></button>
+						<button class="submit column cells" id="4"  data-x="0" data-y="3"></button>
+					</div>
+					<div class="four column row colcell">
+						<button class="submit column cells" id="5"  data-x="1" data-y="0"></button>
+						<button class="submit column cells" id="6"  data-x="1" data-y="1"></button>
+						<button class="submit column cells" id="7"  data-x="1" data-y="2"></button>
+						<button class="submit column cells" id="8"  data-x="1" data-y="3"></button>
+					</div>
+					<div class="four column row colcell">
+						<button class="submit column cells" id="9"  data-x="2" data-y="0"></button>
+						<button class="submit column cells" id="10"  data-x="2" data-y="1"></button>
+						<button class="submit column cells" id="11"  data-x="2" data-y="2"></button>
+						<button class="submit column cells" id="12"  data-x="2" data-y="3"></button>
+					</div>
+					<div class="four column row colcell">
+						<button class="submit column cells" id="13"  data-x="3" data-y="0"></button>
+						<button class="submit column cells" id="14"  data-x="3" data-y="1"></button>
+						<button class="submit column cells" id="15"  data-x="3" data-y="2"></button>
+						<button class="submit column cells" id="16"  data-x="3" data-y="3"></button>
+					</div>
+				</div>
+
+				{% else %}
+					<div class="ui grid cellgrid">
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					<div class="eight column row colcell">
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+						<button class="submit column cells" id="1" value=""></button>
+						<button class="submit column cells" id="2" value=""></button>
+						<button class="submit column cells" id="3" value=""></button>
+						<button class="submit column cells" id="4" value=""></button>
+					</div>
+					
+					</div>
+				{% endif %}		
+
+				
+			</div>
+			<div class="ui"
+				<button class="ui submit secondary button upkey">
+					UP
+				</button>
+				<button class="ui submit secondary button downkey">
+					DOWN
+				</button>
+				<button class="ui submit secondary button leftkey">
+					LEFT
+				</button>
+				<button class="ui submit secondary button rightkey">
+					RIGHT
+				</button>
+		</div>	
+	</div>	
+</div>	
+
+
+<script type="text/javascript" src="{% static 'twozero.js' %}">
+	
+</script>
+</body>
+</html>

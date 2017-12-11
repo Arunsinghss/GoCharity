@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link href=" {% static 'semantics-ui/semantic.min.css' %}" rel="stylesheet"  type="text/css">
+	<link href="{% static 'main.css' %}" rel="stylesheet"  type="text/css">
+	<script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+	<script src="{% static 'semantics-ui/semantic.min.js' %}"></script>	
+</head>
+<body>
+<div class="wrapper">
+	<div class="ui segment topsegment">
+		<div class="ui segment mainwindow">
+			<a href="{% url 'option' option=4 %}"><div class ="ui green button four">4*4</div></a>
+			<a href="{% url 'option' option=5 %}"><div class ="ui black button five">5*5</div></a>	
+			<!-- <a href="{% url 'option' option=8 %}"><div class ="ui yellow button eight">8*8</div></a> -->
+		</div>
+	</div>	
+</div>	
+<script type="text/javascript" src="{% static 'twozero.js' %}">
+	
+</script>
+</body>
+</html>
