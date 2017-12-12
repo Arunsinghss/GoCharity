@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+	{% if person %}
+	<h1>welcome{{ person.first_name }}</h1>
+	{% endif %}
+	<h1><u>Create your own Donation Camp</u></h1>
+	<form action="{% url 'godonate:addcamp' %}" method="post">
+		{% csrf_token %}
+		<pre>
+		Title       :  <input type="text" name="title"><br>
+		Cause       :  <input type="text" name="cause"><br>
+		Goal Amount :  <input type="text" name="goal"><br>
+		<input type="submit" value="create"><br>
+		<b>OR<b><br>
+		<a href = '{% url "godonate:camplist" %}' class="button">Visit To Donate.....</a>
+		<!-- <input type="button" value="Existing Camps"></a> -->
+		</pre>
+	</form>
+	<a href='{% url "godonate:logout" %}' class="topright">Logout</a>
+{% endblock content %}

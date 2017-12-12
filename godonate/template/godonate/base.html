@@ -1,0 +1,21 @@
+{% load static %}
+
+<html>
+	<head>
+		<link href=" {% static 'semantics-ui/semantic.min.css' %}" rel="stylesheet"  type="text/css">
+		<link href=" {% static 'css/home/main.css' %}" rel="stylesheet"  type="text/css">
+		<script src="{% static 'jquery-3.2.1.min.js' %}"></script>
+		<script src="{% static 'semantics-ui/semantic.min.js' %}"></script>
+	</head>
+	<body style="background-image: url('{% static 'images/do.jpg' %}')";>
+		<div class="wrapper">
+			{% block content %}
+			{% endblock content %}
+		</div>
+		{% block js %}
+			<script type="text/javascript" src="{% static 'js/godonate.js' %}">
+				
+			</script>
+		{% endblock js %}
+	</body>
+</html>

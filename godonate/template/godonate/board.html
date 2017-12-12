@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+	<div class="ui segments currentcamp">
+		<div class="ui segment camptitle" >
+		<!-- style="background-image: url('{% static 'images/title.jpg' %}');" -->
+			<h1 class="ctitle"><u>{{ camp.title }}</u></h1><a href='{% url "godonate:camplist" %}' class="blackcolor homelogout"><b><strong>Home</strong></b></a>/<a href='{% url "godonate:logout" %}' class="blackcolor"><b><strong>Logout</strong></b></a>
+
+		</div>
+		<div class="ui black segment topchart">
+			<div class="ui grid">
+				<div class="four wide column">
+					<div class="ui red segment equalsegmentheight">
+						
+						<div class="ui fluid card">
+							<div class="content userimagecamp">
+								<div class="meta">organised on : {{ camp.created_on }}</div>
+							</div>
+							<div class="content">
+
+								<div class="header center">organised by : {{ user.user.first_name }} {{ user.user.last_name }}</div>
+							</div>
+						</div>
+					
+						<div class="ui yellow segment">
+							<div class="ui top black center attached label">TOP  DONORS</div>
+								<div class="ui middle aligned animated list">
+								
+								{% for person in persons %}
+									<div class="item">
+										<img class="ui avatar image" src="{{ person.1.image.url }}">
+										<div class="content">
+											<div class="header">{{ person.1.user.first_name }} $<a class="greentext">{{ person.0 }}</a></div>
+										</div>
+									</div>
+								{% endfor %}	
+								
+								</div>		
+						</div>
+						<div class="ui yellow segment">
+							<div class="ui top black center attached label">TOP  CAMP  DONORS</div>
+								<div class="ui middle aligned animated list">
+								
+								{% for camp in camps %}
+									<div class="item">
+										<img class="ui avatar image" src="{{ camp.1.image.url }}">
+										<div class="content">
+											<div class="header">{{ camp.1.title }} $<a class="greentext">{{ camp.0 }}</a></div>
+										</div>
+									</div>
+								{% endfor %}	
+								</div>	
+						</div>
+					</div>
+				</div>
+
+
+				<div class="seven wide column">
+					<div class="ui red segment equalsegmentheight">
+						<div class="ui black segment">
+							<div class="ui top black center attached label">CAUSE</div>
+						</div>
+						<img class="ui big image" id="campimg" src="{{ camp.image.url }}"><br>
+						<h4>{{ camp.cause }}</h4>
+					</div>
+				</div>
+
+
+				<div class="five wide column">
+					<div class="ui red segment equalsegmentheight">
+						<div class="ui yellow segment">
+							<div class="ui statistic">
+								<div class="value">
+									<i class="dollar icon"></i> <a class="greentext">{{ camp.goal_amount }}</a>
+								</div>
+								<div class="label">
+									Goal Amount
+								</div>
+							</div>
+						</div>
+							<input class="percent" type="hidden" value="{{ percentage }}">
+						<div class="ui yellow segment">
+							<div class="ui top black center attached label">Donation(%)</div>
+							<div class="ui red progress">
+								<div class="bar">
+								<div class="progress"></div>
+								</div>
+								
+							</div>
+						</div>
+						<div class="ui yellow segment">
+							<div class="ui top black center attached label">DONATE THIS CAMP</div>
+							<form action="{% url 'godonate:usermanual' %}" method="post">
+								{% csrf_token %}
+								<div class="ui input">
+									<input type="text" placeholder="amt.." name="{{ camp.id }}" required />
+								</div>
+								<input type="submit" class="ui green button" value="Donate">								
+								</input><br><br>
+							</form>
+						</div>
+						{% if iseligible %}
+							<div class="ui yellow segment">
+								<div class="ui top black center attached label">Donate To Other Camps Equally/Manually</div>	
+								<div class="ui accordion field">
+								<div class="title ">
+									<i class="dropdown icon"></i>
+									Split Equally 
+								</div>
+								<div class="content ">
+									<div class="transition hidden">
+										
+										<a href="{% url 'godonate:campequal' campid=camp.id%}" class="ui green button">
+											Click Here To Donate Equally
+										</a>
+									</div>	
+								</div>
+								<div class="title active">
+									<i class="dropdown icon"></i>
+									Split Manually 
+								</div>
+								<div class="content active">
+										<a href="{% url 'godonate:split' campid=camp.id %}" class="ui green button">
+											Click Here To Donate Manually
+										</a>	
+								</div>
+							</div>							
+							</div>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

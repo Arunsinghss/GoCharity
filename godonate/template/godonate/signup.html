@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<div class="ui segment" id="signupsegment"> 
+	<div class="ui one column middle aligned very relaxed stackable grid logsign">
+		<div class="column">
+			<div class="ui form signupform">
+			{% csrf_token %}
+				<div class="field">
+					<label id="signform">Username</label>
+					<input type="text" placeholder="Username" name="user_name"  id="username" required/>
+				</div>
+				<div class="field">
+					<label id="signform">Firstname</label>
+					<input type="text" placeholder="Firstname" name="first_name"  id="firstname" required/>
+				</div>
+				<div class="field">
+					<label id="signform">Lastname</label>
+					<input type="text" placeholder="Lastname" name="last_name" id="lastname" required/>
+				</div>
+				<div class="field">
+					<label id="signform">Email</label>
+					<input type="text" placeholder="Email" name="email" id="email" required/>
+				</div>
+				<div class="field">
+					<label id="signform">Password</label>
+					<input type="Password" placeholder="*******" name="password" required/>
+				</div>
+				<div class="field">
+					<label id="signform">Gender</label>
+					<div class="field">
+						<div class="ui radio checkbox">
+							<input type="radio" name="gender" value="M" checked="checked" required/>
+							<label id="signform">Male</label>
+						</div>
+					</div>
+					<div class="field">
+						<div class="ui radio checkbox">
+							<input type="radio" name="gender" value="F" required/>
+							<label id="signform">Female</label>
+						</div>
+					</div>	
+				</div>
+				
+				<div class="ui yellow submit button" id="signupbtn">SignUp</div>
+				<a href="{% url 'godonate:login' %}">
+				<div class="ui green button" >Login</div></a>		
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock content %}
+
+
+{{  a }} - {{ b }}

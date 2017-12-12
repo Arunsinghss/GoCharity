@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+	<!-- <div class="ui segments currentcamp"> -->
+	<!-- <div class="ui segment"> -->
+		<div class="ui segment successresult">
+			<h1 class="ctitle"><u>Successfully donated to {{ mycamp.title }}</u><a href='{% url "godonate:board" mycamp.id %}'><br><br><b><strong>Donate more......</strong></b></a></h1><a href='{% url "godonate:camplist" %}' class="blackcolor homelogout"><b><strong>Home</strong></b></a>/<a href='{% url "godonate:logout" %}' class="blackcolor"><b><strong>Logout</strong></b></a>
+		</div>
+	<!-- </div>	 -->
+	<!-- </div> -->
+{% endblock content %}

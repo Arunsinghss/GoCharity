@@ -1,0 +1,25 @@
+<html>
+<head>
+<style type="text/css">
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}	
+</style>	
+</head>
+<body>
+	<form action="{% url 'godonate:split' %}" method="=post">
+	<h2>Start Donating..........</h2>
+		{% csrf_token %}
+		
+		Enter Amount To Split Equally : <input type="text" name="amount" required /><br>
+		
+		Select camps : {% for camp in camps %}
+						<input type="checkbox" name="camp" value="{{ camp.id }}">{{ camp.title }}</input>
+						{% endfor %} <br> 							
+		<input type="submit" value="Donate">				
+	</form>
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+{% block content %}
+	<div class="ui segment" id="loginsegment"> 
+		<div class="ui one column middle aligned very relaxed stackable grid logsign">		
+			<div class="column">
+				<div class="ui form loginform">
+					{% csrf_token %}
+					<div class="field">
+						<label id="logform">Username</label>
+						<div class="ui left icon input">
+							<input type="text" placeholder="Username" id="username" name="username" required />
+							<i class="user icon"></i>
+						</div>
+					</div>
+					<div class="field">
+						<label id="logform">Password</label>
+						<div class="ui left icon input">
+							<input type="password" id="password" name="password" required />
+							<i class="lock icon"></i>
+						</div>
+					</div>
+					<div class="ui green submit button loginbtn" id="loginbtn">Login</div>
+					<a href="{% url 'godonate:signup' %}">
+					<div class="ui yellow button" id="signupbtn">SignUp</div></a>
+					</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}	
+

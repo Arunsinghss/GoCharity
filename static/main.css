@@ -1,0 +1,96 @@
+{% load static %}
+#loginsegment{
+	margin-top: 15em;
+	margin-left: 33em;
+	margin-right: 33em;
+}
+
+#signupsegment{
+	margin-top: 5em;
+	margin-left: 33em;
+	margin-right: 33em;
+}
+
+body {
+	background-image: url('{% static 'images/re.jpg' %}');
+	background-position:center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.logsign{
+	background-color:  #4d5656 ;	
+}
+
+#logform{
+	color:white;
+}
+
+#signform{
+	color:white;
+}
+
+#header{
+	background-image : url("{% static 'images/ban.jpg' %}");
+	height: 15em;
+}
+
+.campsegmentheader{
+	background-image: url("{% static 'images/don.jpg' %}");
+	height : 14em;
+	border-radius: 3em;
+	border-color: black;
+	border:1em;
+}
+
+.campsegmentfooter{
+	background-color: white;
+	height :auto;
+}
+
+.topright {
+    position: absolute;
+    top: 8px;
+    right: 16px;
+    font-size: 18px;
+}
+
+.visit{
+	/*border-radius: 0.285714rem 0.285714rem 0.285714rem 0.285714rem;*/
+	margin:-1em;
+}
+
+.camplistsegment{
+	background-color: cornsilk;
+}
+
+.cardtitle{
+	text-align: center;
+}
+
+.cardorganised{
+	text-align: center;
+}
+
+.ctitle{
+	text-align: center;
+	font-size: 6em;
+}
+
+.camptitle{
+	height:12em;
+	border-radius: 3em;
+}
+
+.currentcamp{
+	background-color: white;
+	height :auto;
+	margin: 1em;
+}
+.campsegmentfooter{
+	background-color: white;
+	height :auto;
+}
+
+.topchart{
+	background-color: white;
+}
