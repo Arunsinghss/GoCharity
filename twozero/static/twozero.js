@@ -17,9 +17,24 @@ $(document).ready(function(){
 	gridsize = b*b;
 	score = 0;
 	// currentscore = 0;
-	
 
-	function getUniqueId(id){	
+	function getScreenGrid(){
+		previous = new Array();
+		for(var i=0;i<=m;i++){
+			previous[i] = new Array();
+			for(var j=0;j<=n;j++){
+				if($('.cells[data-x="'+i+'"][data-y="'+j+'"]').text() == ''){
+					previous[i][j]= 0;
+				}else{
+					previous[i][j]= parseInt($('.cells[data-x="'+i+'"][data-y="'+j+'"]').text());
+				}
+			}
+		}
+	}
+	
+	getScreenGrid();
+
+	function getUniqueId(id){
 
 		if($('#'+id).text() == ''){
 			return false;
@@ -34,57 +49,145 @@ $(document).ready(function(){
 			var randomid = getRandomNumber(1,gridsize);
 		}while(getUniqueId(randomid));
 		$('#'+randomid).text(getRandomOnkey(2,4));
-		console.log('generating')
-		console.log(randomid)
 		newvalue = parseInt($('#'+randomid).text());
 	}
 
 	function endGame(){
-		var count = 0;
+		var isempty = false;
 		for(var i=1;i<=gridsize;i++){
 			if($('#'+i).text() == ''){
-				count = 1;
+				isempty = true;
 				break;
 			}else{
 				continue;
 			}
 		}
 
-		if(count == 1){
+		if(isempty == true){
 			setOnUniqueId();
-		}else{
-			alert("Game Over");
-			for(var i=1;i<=gridsize;i++){
-				$('#'+i).text('');
-			}
-			$('#'+getRandomNumber(1,16)).text("2");
-			$('#'+getRandomNumber(1,16)).text("2");
-			score = 4;
 		}
 	}
 
-	// function currentScore(){
-	// 	for(var i=0;i<=m;i++){
-	// 		for(var j=0;j<=n;j++){
-	// 			if($('.cells[data-x="'+i+'"][data-y="'+j+'"]').text() == ''){
-	// 				currentscore += 0;
+	function newGame(){
+		for(var i=1;i<=gridsize;i++){
+			$('#'+i).text('');
+		}
+		$('#'+getRandomNumber(1,16)).text("2");
+		$('#'+getRandomNumber(1,16)).text("2");
+		score = 4;
+	}
+
+	function callCheckStatus(){
+		console.log('entered call status')
+		oldone = new Array();
+		for(var i=0;i<=m;i++){
+			oldone[i] = new Array();
+			for(var j=0;j<=n;j++){
+				if($('.cells[data-x="'+i+'"][data-y="'+j+'"]').text() == ''){
+					oldone[i][j]= 0;
+				}else{
+					oldone[i][j]= parseInt($('.cells[data-x="'+i+'"][data-y="'+j+'"]').text());
+				}
+			}
+		}
+		can_call = true;
+		for(i=0;i<=m;i++){
+			for(j=0;j<=m;j++){
+				
+				if(oldone[i][j] == 0){
+					console.log('got empty')
+					can_call = false;
+					break;
+				}
+			}
+		}
+
+		if(can_call == true){
+			console.log('entering')
+			// checkStatus();
+		}
+	}
+
+	// function checkStatus(){
+	// 	getScreenGrid();
+	// 	can_move_up = false;
+	// 	can_move_down = false;
+	// 	can_move_left = false;
+	// 	can_move_right = false;
+
+	// 	shiftUp();
+	// 	for(i=0;i<=m;i++){
+	// 		for(j=0;j<=m;j++){
+	// 			console.log('hello')
+	// 			console.log(previous[i][j])
+	// 			console.log('hello')
+	// 			if(previous[i][j] != a[i][j]){
+	// 				can_move_up = true;
+	// 				break;
 	// 			}
-	// 			else{
-	// 				currentscore += parseInt($('.cells[data-x="'+i+'"][data-y="'+j+'"]').text());
-	// 			}	
 	// 		}
 	// 	}
-	// }
 
+	// 	shiftDown();
+	// 	for(i=0;i<=m;i++){
+	// 		for(j=0;j<=m;j++){
+	// 			console.log('hello')
+	// 			console.log(previous[i][j])
+	// 			console.log('hello')
+	// 			if(previous[i][j] != a[i][j]){
+	// 				can_move_down = true;
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
+
+	// 	shiftLeft();
+	// 	for(i=0;i<=m;i++){
+	// 		for(j=0;j<=m;j++){
+	// 			if(previous[i][j] != a[i][j]){
+	// 				can_move_left = true;
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
+
+	// 	shiftRight();
+	// 	for(i=0;i<=m;i++){
+	// 		for(j=0;j<=m;j++){
+	// 			if(previous[i][j] != a[i][j]){
+	// 				can_move_right = true;
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
+		
+	// 	if(can_move_up == false && can_move_down == false && can_move_left == false && can_move_right == false){
+	// 		alert("Game Over....");
+	// 		newGame();
+	// 	}
+	// }	
 
 	function highScore(newvalue){
-		score += newvalue;
-		$('.score').text(score);
+		var change_score = false;
+		for(i=1;i<=m;i++){
+			for(j=0;j<=n;j++){
+				if(previous[i][j] != a[i][j]){
+					change_score = true;
+					break;
+				}
+			}
+		}
+
+		if (change_score == true){
+			// score += newvalue;
+			$('.score').text(score);
+		}
+		
 	}
 
 	function setColor(){
 		for(var i=1;i<=gridsize;i++){
-			console.log(i);
+			
 			if($('#'+i).text() == '2'){
 				$('#'+i).css("background","white");
 			}else if($('#'+i).text() == ''){
@@ -181,327 +284,60 @@ $(document).ready(function(){
 		endGame();
 	}	
 
+	function drawGridSetColorSetScore(){
+		drawGrid(a);
+		highScore(newvalue);
+		setColor();
+	}
+
 	$(document).keyup(function(e){
 		if(e.keyCode == 38){
-	
-			// console.log('leftkey');
-			grid();
-			var changedrow=[];
-			for(i=1;i<=m;i++){		
-				for(j=0;j<=n;j++){				
-					if(a[i][j] == 0){
-						console.log('1')
-						continue;					
-					}
-					else{
-						console.log('2')
-						k=1;
-						if(a[i-k][j] == 0){
-							if (i-k == 0){
-								a[i-k][j] = a[i][j];
-								a[i][j] = 0;
-							}
-							else{
-								c=k+1;
-								while(i-c >= 0){
-									console.log('5');
-									if(a[i-c][j] == 0){									
-										c++;
-									}
-									else{
-										break;
-									}
-								}
-								if(a[i-(c-1)][j] == 0){
-									a[i-(c-1)][j] = a[i][j];
-									a[i][j] = 0;
-									}
-								else{
-									if(a[i-(c-1)][j] == a[i][j]){
-										for(col=0;col<changedrow.length;col++){
-											if (col == i){
-												var present = true;
-												break;
-											}else{
-												var present = false;
-											}
-										}
-
-										if(present == true){
-											a[i-(c-1)][j] = a[i][j];
-											a[i][j] = 0;
-										}
-										else{
-											a[i-(c-1)][j] *= 2;
-											score += a[i-(c-1)][j];
-											a[i][j] = 0;
-											changedrow.push[j];
-										}
-									}
-									else{
-										a[i-(c-1)][j] = a[i][j];
-										a[i][j] = 0;
-									}
-								}
-							}
-						}
-						else{
-							if(a[i-k][j] == a[i][j]){
-								a[i-k][j] *= 2;
-								score +=a[i-k][j];
-								a[i][j] = 0;
-							}
-							else{
-								continue;
-							}
-						}
-					}
-				}
-			} 		
-			drawGrid(a);
-			highScore(newvalue);
-			setColor();
+			callCheckStatus();
+			shiftUp();
 		}
 		if(e.keyCode == 37){
-		
-			grid();
-			var leftarray = [];
-			for(i=0;i<=m;i++){
-				for(j=1;j<=n;j++){				
-					if(a[i][j] == 0){
-						continue;					
-					}
-					else{
-						k=1;
-						if(a[i][j-k] == 0){
-							if (j-k == 0){
-								a[i][j-k] = a[i][j];
-								a[i][j] = 0;
-							}
-							else{
-								c=k+1;
-								while(j-c >= 0){
-									if(a[i][j-c] == 0){									
-										c++;
-									}
-									else{
-										break;
-									}
-								}
-								if(a[i][j-c] == 0){
-									a[i][j-c] = a[i][j];
-									a[i][j] = 0;
-									}
-								else{
-									if(a[i][j-c] == a[i][j]){
-
-										for(col=0;col<leftarray.length;col++){
-											if (col == i){
-												var present = true;
-												break;
-											}else{
-												var present = false;
-											}
-										}
-										if(present == true){
-											a[i][j-(c-1)] = a[i][j];
-											a[i][j] = 0;
-										}
-										else{
-											a[i][j-c] *= 2;
-											score += a[i][j-c];
-											a[i][j] = 0;
-											leftarray.push[i];
-										}
-									}
-									else{
-										a[i][j-(c-1)] = a[i][j];
-										a[i][j] = 0;
-									}
-								}
-							}
-						}
-						else{
-							if(a[i][j-k] == a[i][j]){
-								a[i][j-k] *= 2;
-								score += a[i][j-k];
-								a[i][j] = 0;
-							}
-							else{
-								continue;
-							}
-						}
-					}
-				}
-			} 
-			drawGrid(a);
-			highScore(newvalue);
-			setColor();
+			callCheckStatus();		
+			shiftLeft();
 		}
-
 		if(e.keyCode == 40){
-			
-			grid();
-			var downarray=[];
-			for(i=m-1;i>=0;i--){
-				for(j=0;j<=n;j++){				
-					if(a[i][j] == 0){
-						continue;					
-					}
-					else{
-						k=1;
-						if(a[i+k][j] == 0){
-							if (i+k == max){
-								a[i+k][j] = a[i][j];
-								a[i][j] = 0;
-							}
-							else{
-								c=k+1;
-
-								while(i+c < max){
-									if(a[i+c][j] == 0){								
-										c++;
-									}
-									else{
-										break;
-									}
-								}
-								if(a[i+c][j] == 0){
-									a[i+c][j] = a[i][j];
-									a[i][j] = 0;
-									}
-								else{
-									if(a[i+c][j] == a[i][j]){
-										for(col=0;col<downarray.length;col++){
-											if (col == i){
-												var present = true;
-												break;
-											}else{
-												var present = false;
-											}
-										}
-										if(present == true){
-											a[i+(c-1)][j] = a[i][j];
-											a[i][j] = 0;
-										}
-										else{
-											a[i+c][j] *= 2;
-											score += a[i+c][j];
-											a[i][j] = 0;
-											downarray.push[j];
-										}
-									}
-									else{
-										a[i+(c-1)][j] = a[i][j];
-										a[i][j] = 0;
-									}
-								}
-							}
-						}
-						else{
-							if(a[i+k][j] == a[i][j]){
-								a[i+k][j] *= 2;
-								score += a[i+k][j];
-								a[i][j] = 0;
-							}
-							else{
-								continue;
-							}
-						}
-					}
-				}
-			}		 
-			drawGrid(a);
-			highScore(newvalue);
-			setColor();
+			callCheckStatus();	
+			shiftDown();
 		}
-
 		if(e.keyCode == 39){
-			grid();
-			var rightarray = [];
-			for(i=0;i<=m;i++){		
-				for(j=n-1;j>=0;j--){				
-					if(a[i][j] == 0){
-						continue;					
-					}
-					else{
-						k=1;
-						if(a[i][j+k] == 0){
-							if (j+k == max){
-								a[i][j+k] = a[i][j];
-								a[i][j] = 0;
-							}
-							else{
-								c=k+1;
-								while(j+c < max){
-									if(a[i][j+c] == 0){									
-										c++;
-									}
-									else{
-										break;
-									}
-								}
-								if(a[i][j+c] == 0){
-									a[i][j+c] = a[i][j];
-									a[i][j] = 0;
-									}
-								else{
-
-									if(a[i][j+c] == a[i][j]){
-										for(col=0;col<rightarray.length;col++){
-											if (col == i){
-												var present = true;
-
-												break;
-											}else{
-												var present = false;
-											}
-										}
-
-										if(present == true){
-											a[i][j+(c-1)] = a[i][j];
-											a[i][j] = 0;
-										}
-										else{
-											a[i][j+c] *= 2;
-											score += a[i][j+c];
-											a[i][j] = 0;
-											rightarray.push[i];
-										}
-									}
-									else{
-										a[i][j+(c-1)] = a[i][j];
-										a[i][j] = 0;
-									}
-								}
-							}
-						}
-						else{
-							if(a[i][j+k] == a[i][j]){
-								a[i][j+k] *= 2;
-								score += a[i][j+k] ;
-								a[i][j] = 0;
-							}
-							else{
-								continue;
-							}
-						}
-					}
-				}
-			} 
-			
-			drawGrid(a);
-			highScore(newvalue);
-			setColor();
+			callCheckStatus();
+			shiftRight();
 		}
 	});	
 
 	$('.upkey').click(function(){
+		console.log('entered key function')
+		callCheckStatus();
+		shiftUp();
+	});
 
+	$('.leftkey').click(function(){	
+		console.log('entered key function')
+		callCheckStatus();	
+		shiftLeft();
+	});
+
+	$('.downkey').click(function(){
+		console.log('entered key function')
+		callCheckStatus();
+		shiftDown();
+	});
+
+	$('.rightkey').click(function(){
+		console.log('entered key function')
+		callCheckStatus();
+		shiftRight();
+	});
+
+	function shiftUp(){
+		console.log('called upkey')
 		grid();
 		var changedrow=[];
-
-		for(i=1;i<=m;i++){		
+		for(i=1;i<=m;i++){
 			for(j=0;j<=n;j++){				
 				if(a[i][j] == 0){
 					console.log('1')
@@ -571,14 +407,88 @@ $(document).ready(function(){
 					}
 				}
 			}
-		} 		
-		drawGrid(a);
-		highScore(newvalue);
-		setColor();
-	});
+		}
+		 		
+		drawGridSetColorSetScore();
+	}
 
-	$('.leftkey').click(function(){
-		
+	function shiftDown(){
+		console.log('called down key')
+		grid();
+		var downarray=[];
+		for(i=m-1;i>=0;i--){
+			for(j=0;j<=n;j++){
+				if(a[i][j] == 0){
+					continue;					
+				}
+				else{
+					k=1;
+					if(a[i+k][j] == 0){
+						if (i+k == max){
+							a[i+k][j] = a[i][j];
+							a[i][j] = 0;
+						}
+						else{
+							c=k+1;
+
+							while(i+c < max){
+								if(a[i+c][j] == 0){								
+									c++;
+								}
+								else{
+									break;
+								}
+							}
+							if(a[i+c][j] == 0){
+								a[i+c][j] = a[i][j];
+								a[i][j] = 0;
+								}
+							else{
+								if(a[i+c][j] == a[i][j]){
+									for(col=0;col<downarray.length;col++){
+										if (col == i){
+											var present = true;
+											break;
+										}else{
+											var present = false;
+										}
+									}
+									if(present == true){
+										a[i+(c-1)][j] = a[i][j];
+										a[i][j] = 0;
+									}
+									else{
+										a[i+c][j] *= 2;
+										score += a[i+c][j];
+										a[i][j] = 0;
+										downarray.push[j];
+									}
+								}
+								else{
+									a[i+(c-1)][j] = a[i][j];
+									a[i][j] = 0;
+								}
+							}
+						}
+					}
+					else{
+						if(a[i+k][j] == a[i][j]){
+							a[i+k][j] *= 2;
+							score += a[i+k][j];
+							a[i][j] = 0;
+						}
+						else{
+							continue;
+						}
+					}
+				}
+			}
+		}
+		drawGridSetColorSetScore();
+	}
+
+	function shiftLeft(){
+		console.log('called left key')
 		grid();
 		var leftarray = [];
 		for(i=0;i<=m;i++){
@@ -661,94 +571,14 @@ $(document).ready(function(){
 				}
 			}
 		} 
-		drawGrid(a);
-		highScore(newvalue);
-		setColor();
-	});
+		drawGridSetColorSetScore();
+	}
 
-	$('.downkey').click(function(){
-
-		grid();
-		var downarray=[];
-		for(i=m-1;i>=0;i--){
-			for(j=0;j<=n;j++){				
-				if(a[i][j] == 0){
-					continue;					
-				}
-				else{
-					k=1;
-					if(a[i+k][j] == 0){
-						if (i+k == max){
-							a[i+k][j] = a[i][j];
-							a[i][j] = 0;
-						}
-						else{
-							c=k+1;
-
-							while(i+c < max){
-								if(a[i+c][j] == 0){								
-									c++;
-								}
-								else{
-									break;
-								}
-							}
-							if(a[i+c][j] == 0){
-								a[i+c][j] = a[i][j];
-								a[i][j] = 0;
-								}
-							else{
-								if(a[i+c][j] == a[i][j]){
-									for(col=0;col<downarray.length;col++){
-										if (col == i){
-											var present = true;
-											break;
-										}else{
-											var present = false;
-										}
-									}
-									if(present == true){
-										a[i+(c-1)][j] = a[i][j];
-										a[i][j] = 0;
-									}
-									else{
-										a[i+c][j] *= 2;
-										score += a[i+c][j];
-										a[i][j] = 0;
-										downarray.push[j];
-									}
-								}
-								else{
-									a[i+(c-1)][j] = a[i][j];
-									a[i][j] = 0;
-								}
-							}
-						}
-					}
-					else{
-						if(a[i+k][j] == a[i][j]){
-							a[i+k][j] *= 2;
-							score += a[i+k][j];
-							a[i][j] = 0;
-						}
-						else{
-							continue;
-						}
-					}
-				}
-			}
-		}
-		 
-		drawGrid(a);
-		highScore(newvalue);
-		setColor();
-	});
-
-	$('.rightkey').click(function(){
-
+	function shiftRight(){
+		console.log('called right key')
 		grid();
 		var rightarray = [];
-		for(i=0;i<=m;i++){		
+		for(i=0;i<=m;i++){
 			for(j=n-1;j>=0;j--){				
 				if(a[i][j] == 0){
 					continue;					
@@ -818,11 +648,9 @@ $(document).ready(function(){
 				}
 			}
 		} 
-		
-		drawGrid(a);
-		highScore(newvalue);
-		setColor();
-	});
+		drawGridSetColorSetScore();
+	}
+
 
 });
 
